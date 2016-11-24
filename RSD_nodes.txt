@@ -1,0 +1,15 @@
+EVENT-B final term assignment/presentation
+
+- 3 teams of 3 people
+- 20th January
+- Topic teamwork --> about to be published
+
+
+> Dec 9th  --> property-based testing intro.
+> Dec 16th --> Questions on Floid-H/Dafny and Maude
+> Jan 13th --> Questions on Maude/EVENT-B assignment
+
+
+maude
+exercise 3 difficult. no solution needed
+exercise 4: conditional equation (ceq)

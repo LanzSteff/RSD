@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.contextFile org.eventb.core.configuration="org.eventb.core.fwd" version="3">
+<org.eventb.core.constant name="'" org.eventb.core.identifier="n"/>
+<org.eventb.core.constant name="(" org.eventb.core.identifier="v"/>
+<org.eventb.core.constant name=")" org.eventb.core.identifier="f"/>
+<org.eventb.core.axiom name="*" org.eventb.core.label="axm1" org.eventb.core.predicate="n ≥ 1"/>
+<org.eventb.core.axiom name="," org.eventb.core.label="axm3" org.eventb.core.predicate="f ∈ 1‥n → ℕ"/>
+<org.eventb.core.axiom name="-" org.eventb.core.label="axm4" org.eventb.core.predicate="v ∈ ran(f)"/>
+<org.eventb.core.axiom name="." org.eventb.core.label="axm5" org.eventb.core.predicate="∀ i, j·(i∈dom(f) ∧ j∈dom(f) ∧ i ≤ j) ⇒ f(i) ≤ f(j)"/>
+<org.eventb.core.axiom name="/" org.eventb.core.comment="∀ i, j · (i∈dom(f) ∧ j∈dom(f) ∧ f(i) ≤ f(j)) ⇒ i ≤ j" org.eventb.core.label="axm6" org.eventb.core.predicate="⊤" org.eventb.core.theorem="true"/>
+</org.eventb.core.contextFile>

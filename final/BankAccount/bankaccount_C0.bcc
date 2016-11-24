@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.scContextFile org.eventb.core.accurate="true" org.eventb.core.configuration="org.eventb.core.fwd">
+<org.eventb.core.scAxiom name="'" org.eventb.core.label="axm1" org.eventb.core.predicate="finite(CLIENTS)" org.eventb.core.source="/BankAccount/bankaccount_C0.buc|org.eventb.core.contextFile#bankaccount_C0|org.eventb.core.axiom#(" org.eventb.core.theorem="false"/>
+<org.eventb.core.scAxiom name="(" org.eventb.core.label="axm2" org.eventb.core.predicate="finite(ACCOUNTS)" org.eventb.core.source="/BankAccount/bankaccount_C0.buc|org.eventb.core.contextFile#bankaccount_C0|org.eventb.core.axiom#," org.eventb.core.theorem="false"/>
+<org.eventb.core.scAxiom name=")" org.eventb.core.label="axm3" org.eventb.core.predicate="k&gt;0" org.eventb.core.source="/BankAccount/bankaccount_C0.buc|org.eventb.core.contextFile#bankaccount_C0|org.eventb.core.axiom#." org.eventb.core.theorem="false"/>
+<org.eventb.core.scCarrierSet name="ACCOUNTS" org.eventb.core.source="/BankAccount/bankaccount_C0.buc|org.eventb.core.contextFile#bankaccount_C0|org.eventb.core.carrierSet#-" org.eventb.core.type="ℙ(ACCOUNTS)"/>
+<org.eventb.core.scCarrierSet name="CLIENTS" org.eventb.core.source="/BankAccount/bankaccount_C0.buc|org.eventb.core.contextFile#bankaccount_C0|org.eventb.core.carrierSet#)" org.eventb.core.type="ℙ(CLIENTS)"/>
+<org.eventb.core.scConstant name="k" org.eventb.core.source="/BankAccount/bankaccount_C0.buc|org.eventb.core.contextFile#bankaccount_C0|org.eventb.core.constant#'" org.eventb.core.type="ℤ"/>
+</org.eventb.core.scContextFile>

@@ -1,0 +1,11 @@
+sorts Nat ZNat NzNat .
+subsort ZNat < Nat .
+subsort NrNat < Nat .
+
+protecting BOOL .
+
+op zero : -> ZNat .
+op succ : Nat -> NzNat .
+op add : Nat Nat -> Nat .
+op pred_ : NzNat -> Nat .
+

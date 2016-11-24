@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<org.eventb.core.machineFile org.eventb.core.configuration="org.eventb.core.fwd" version="5">
+<org.eventb.core.event name="'" org.eventb.core.convergence="0" org.eventb.core.extended="true" org.eventb.core.label="INITIALISATION">
+<org.eventb.core.action name="(" org.eventb.core.assignment="client ≔ ∅" org.eventb.core.label="iniCli"/>
+<org.eventb.core.action name=")" org.eventb.core.assignment="account ≔ ∅" org.eventb.core.label="iniAcc"/>
+<org.eventb.core.action name="*" org.eventb.core.assignment="balance ≔ ∅" org.eventb.core.label="iniBal"/>
+<org.eventb.core.action name="+" org.eventb.core.assignment="ctransf ≔ ∅" org.eventb.core.label="iniTra"/>
+</org.eventb.core.event>
+<org.eventb.core.seesContext name="(" org.eventb.core.target="bankaccount_C0"/>
+<org.eventb.core.variable name="*" org.eventb.core.identifier="client"/>
+<org.eventb.core.variable name="+" org.eventb.core.identifier="account"/>
+<org.eventb.core.event name="-" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="open">
+<org.eventb.core.parameter name="'" org.eventb.core.identifier="cli"/>
+<org.eventb.core.guard name="+" org.eventb.core.label="isClient" org.eventb.core.predicate="cli ∈ CLIENTS"/>
+<org.eventb.core.action name="." org.eventb.core.assignment="balance(acc) ≔ 0" org.eventb.core.label="setBal"/>
+<org.eventb.core.parameter name="/" org.eventb.core.identifier="acc"/>
+<org.eventb.core.guard name="1" org.eventb.core.label="noRepeat" org.eventb.core.predicate="acc ∈ account"/>
+<org.eventb.core.action name="2" org.eventb.core.assignment="client(acc) ≔ cli" org.eventb.core.label="setCli"/>
+<org.eventb.core.action name="3" org.eventb.core.assignment="ctransf(acc) ≔ 0" org.eventb.core.label="setTra"/>
+</org.eventb.core.event>
+<org.eventb.core.invariant name="/" org.eventb.core.label="invAcc" org.eventb.core.predicate="account ⊆ ACCOUNTS"/>
+<org.eventb.core.event name="0" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="deposit">
+<org.eventb.core.parameter name="'" org.eventb.core.identifier="acc"/>
+<org.eventb.core.parameter name="(" org.eventb.core.identifier="amount"/>
+<org.eventb.core.guard name=")" org.eventb.core.label="isCli" org.eventb.core.predicate="cli ∈ CLIENTS"/>
+<org.eventb.core.parameter name="*" org.eventb.core.identifier="cli"/>
+<org.eventb.core.guard name="+" org.eventb.core.label="isAcc" org.eventb.core.predicate="acc ∈ account"/>
+<org.eventb.core.guard name="," org.eventb.core.label="isPos" org.eventb.core.predicate="amount ≥ 0"/>
+<org.eventb.core.action name="-" org.eventb.core.assignment="balance(acc) ≔ balance(acc) + amount" org.eventb.core.label="incBal"/>
+</org.eventb.core.event>
+<org.eventb.core.variable name="1" org.eventb.core.identifier="balance"/>
+<org.eventb.core.invariant name="3" org.eventb.core.label="invBal" org.eventb.core.predicate="balance ∈ account → ℕ"/>
+<org.eventb.core.invariant name="4" org.eventb.core.label="invCli" org.eventb.core.predicate="client ∈ account → CLIENTS"/>
+<org.eventb.core.event name="5" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="withdraw">
+<org.eventb.core.parameter name="'" org.eventb.core.identifier="acc"/>
+<org.eventb.core.parameter name="(" org.eventb.core.identifier="amount"/>
+<org.eventb.core.parameter name=")" org.eventb.core.identifier="cli"/>
+<org.eventb.core.guard name="*" org.eventb.core.label="isAcc" org.eventb.core.predicate="acc ∈ account"/>
+<org.eventb.core.guard name="/" org.eventb.core.label="isCli" org.eventb.core.predicate="cli ∈ CLIENTS"/>
+<org.eventb.core.guard name="+" org.eventb.core.label="valCli" org.eventb.core.predicate="client(acc) = cli"/>
+<org.eventb.core.guard name="," org.eventb.core.label="isPos" org.eventb.core.predicate="amount ≥ 0"/>
+<org.eventb.core.guard name="-" org.eventb.core.label="isEnough" org.eventb.core.predicate="balance(acc) ≥ amount"/>
+<org.eventb.core.action name="." org.eventb.core.assignment="balance(acc) ≔ balance(acc) − amount" org.eventb.core.label="decBal"/>
+<org.eventb.core.action name="0" org.eventb.core.assignment="ctransf(acc) ≔ amount" org.eventb.core.label="setTra"/>
+<org.eventb.core.guard name="1" org.eventb.core.label="smallerK" org.eventb.core.predicate="(ctransf(acc) + amount) ≤ k"/>
+</org.eventb.core.event>
+<org.eventb.core.event name="6" org.eventb.core.convergence="0" org.eventb.core.extended="false" org.eventb.core.label="transfer">
+<org.eventb.core.parameter name="'" org.eventb.core.identifier="fromAcc"/>
+<org.eventb.core.parameter name="(" org.eventb.core.identifier="toAcc"/>
+<org.eventb.core.parameter name=")" org.eventb.core.identifier="amount"/>
+<org.eventb.core.parameter name="*" org.eventb.core.identifier="cli"/>
+<org.eventb.core.guard name="+" org.eventb.core.label="isAcc1" org.eventb.core.predicate="fromAcc ∈ account"/>
+<org.eventb.core.guard name="," org.eventb.core.label="isAcc2" org.eventb.core.predicate="toAcc ∈ account"/>
+<org.eventb.core.guard name="-" org.eventb.core.label="isPos" org.eventb.core.predicate="amount ≥ 0"/>
+<org.eventb.core.guard name="." org.eventb.core.label="isCli" org.eventb.core.predicate="cli ∈ CLIENTS"/>
+<org.eventb.core.guard name="/" org.eventb.core.label="valCli" org.eventb.core.predicate="client(fromAcc) = cli"/>
+<org.eventb.core.guard name="0" org.eventb.core.label="isEnough" org.eventb.core.predicate="balance(fromAcc) ≥ amount"/>
+<org.eventb.core.action name="4" org.eventb.core.assignment="balance ≔ balance  {fromAcc ↦ balance(fromAcc) − amount,toAcc ↦ balance(toAcc) + amount}" org.eventb.core.label="setBal"/>
+<org.eventb.core.action name="5" org.eventb.core.assignment="ctransf(fromAcc) ≔ amount" org.eventb.core.label="setTra"/>
+<org.eventb.core.guard name="6" org.eventb.core.label="smallerK" org.eventb.core.predicate="(ctransf(fromAcc) + amount) ≤ k"/>
+<org.eventb.core.guard name="7" org.eventb.core.label="notSame" org.eventb.core.predicate="fromAcc ≠ toAcc"/>
+</org.eventb.core.event>
+<org.eventb.core.variable name="7" org.eventb.core.identifier="ctransf"/>
+<org.eventb.core.invariant name="8" org.eventb.core.label="invTra" org.eventb.core.predicate="ctransf ∈ account → ℕ"/>
+</org.eventb.core.machineFile>

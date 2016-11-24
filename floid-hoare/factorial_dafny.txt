@@ -1,0 +1,39 @@
+http://www.rise4fun.com/Dafny/pl8ht
+
+function fact (n: nat): nat {
+  if   n > 0
+  then n * fact(n-1)
+  else 1
+}
+method Factorial (n: nat) returns (r : int )
+  ensures r == fact(n);
+{
+  var t: nat := n;
+  r := 1;
+  while t > 0 
+  invariant r > 0;
+  invariant fact(t) * r == fact(n)
+  decreases t;
+  {
+    r := r * t;
+    t := t - 1;
+  }
+}
+
+/*
+n = 5 | t = 5 | r = 1
+n = 5 | t = 4 | r = 1*5
+n = 5 | t = 3 | r = 1*5*4
+n = 5 | t = 2 | r = 1*5*4*3
+n = 5 | t = 1 | r = 1*5*4*3*2
+
+fact(n) = fact(t) * r
+
+
+5
+20
+60
+120
+
+
+*/
