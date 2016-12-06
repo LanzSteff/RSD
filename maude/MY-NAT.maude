@@ -1,0 +1,44 @@
+fmod MY-NAT is
+	protecting NAT .
+	***sorts Nat Bool .
+	ops even odd : Nat -> Bool .
+	op half : Nat -> Nat .
+	op _quot_ : Nat NzNat -> Nat .
+	***op _-_ : Nat Nat -> Nat .
+	op _remd_ : Nat NzNat -> Nat .
+	var M : Nat .
+	var N : NzNat .
+	eq even(0) = true .
+	eq even(s(M)) = odd(M) .
+	eq odd(0) = false .
+	eq odd(s(M)) = even(M) .
+	eq half(0) = 0 .
+	eq half(s(0)) = 0 .
+	ceq half(s(M)) = half(M) if even(M) .
+	ceq half(s(M)) = s(half(M)) if odd(M) .
+	eq 0 quot N = 0 .
+	eq M quot s(0) = M .
+	eq N quot N = s(0) .
+	eq s(M) quot s(M) = s(0) .
+	eq N quot s(N) = 0 .	
+	eq M quot N = half(M) quot half(N) .
+	
+	eq 0 remd s(0) = 0 .
+	eq s(0) remd s(0) = 0 .
+	eq 0 remd N = 0 .
+	eq M remd s(0) = 0 .
+	eq N remd N = 0 .
+	eq M remd s(M) = M .
+	eq s(N) remd N = s(0) .
+	ceq M remd s(s(0)) = 0 if even(M) .
+	ceq M remd s(s(0)) = 1 if odd(M) .
+	ceq M remd N = s(half(M) remd half(N)) if even(M) .
+	ceq M remd N = s(s(half(M) remd half(N))) if odd(M) .
+	
+	***eq 0 - N = 0 .
+	***eq s(M) - 0 = s(M) .
+	***eq s(M) - s(N) = M - N .
+	***ceq N mod P = N if P > N .
+	***ceq N mod P = (N - P) mod P if P <= N .
+	
+endfm

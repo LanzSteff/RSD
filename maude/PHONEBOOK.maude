@@ -1,0 +1,23 @@
+fmod PHONEBOOK is
+	protecting NAT .
+	sorts Phonebook Nemptyphb .
+	subsort Nat < Nemptyphb < Phonebook .
+	
+	op create : -> Phonebook .
+	op __ : Phonebook Phonebook -> Phonebook [assoc comm id: create] .
+	op __ : Nemptyphb Nemptyphb -> Nemptyphb [assoc comm id: create] .
+	op lookup : Nat Phonebook -> Bool .
+	op delete : Nat Phonebook -> Phonebook .
+	op update :  Phonebook Phonebook -> Phonebook .
+	
+	vars N N' : Nat .
+	vars P P' : Phonebook .
+	
+	eq lookup(N, create) = false .
+	eq lookup(N, N' P) = N == N' or lookup(N, P) .
+	eq delete(N, create) = create .
+	eq delete(N, N P) = delete(N, P) .
+	ceq delete(N, N' P) = N' delete(N, P) if N =/= N' .
+	eq update(P, create) = P .
+	eq update(P, N P') = update(delete(N, P), P') .
+endfm

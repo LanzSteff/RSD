@@ -1,0 +1,8 @@
+fmod FIB2 is
+	protecting NAT .
+	op fib2 : Nat -> Nat [memo] .
+	var N : Nat .
+	eq fib2(0) = 0 .
+	eq fib2(s(0)) = s(0) .
+	eq fib2(s(s(N))) = fib2(N) + fib2(s(N)) .
+endfm

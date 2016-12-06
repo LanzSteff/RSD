@@ -1,0 +1,19 @@
+function fact (n: nat): nat {
+  if   n > 0
+  then n * fact(n-1)
+  else 1
+}
+method Factorial (n: nat) returns (r : int )
+  ensures r == fact(n);
+{
+  var t: nat := n;
+  r := 1;
+  while t > 0 
+  invariant r > 0;
+  invariant fact(t) * r == fact(n)
+  decreases t;
+  {
+    r := r * t;
+    t := t - 1;
+  }
+}

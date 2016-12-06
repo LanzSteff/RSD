@@ -1,0 +1,75 @@
+function sorted (a: array <int>): bool
+  requires a != null ;
+  reads a;
+{
+  forall i,k :: (0 <= i < k < a.Length) ==> (a[i] <= a[k])
+}
+
+// This predicate is used in the loop invariants
+function sortedPartially (a: array<int>, j: int): bool
+  requires a != null ;
+  requires j <= a.Length;
+  reads a;
+{
+  forall i,k :: (0 <= i < k < j) ==> (a[i] <= a[k])
+}
+
+
+method InsertSorted(a: array <int>, key: int ) returns (b: array <int>)
+  requires a != null && sorted(a);
+  ensures  b != null;
+  ensures sorted(b);
+{
+  assert sortedPartially(a, a.Length);
+  b := new int[a.Length + 1];
+  assert b.Length == a.Length + 1;
+  assert b.Length > 0;
+  
+  // The first trivial case: a is empty:
+  if (a.Length == 0) {
+    b[0] := key;
+    return b;
+  }
+
+  // Find the insertion index i
+  var i: int := 0;
+  assert i < a.Length;
+  while (i < a.Length && a[i] < key)
+  invariant 0 <= i <= a.Length;
+  invariant forall x: int :: (0 <= x < i) ==> a[x] < key;   
+  {
+    i := i + 1;
+  }
+  assert !(i < a.Length) || !(a[i] < key);
+  assert (i == a.Length) || (key <= a[i]);
+
+  // Copy the begginning of a (fragment from 0 up to i):
+  var j: int := 0;
+  while (j < i)
+  invariant 0 <= j <= a.Length;
+  invariant forall x:int :: (0 <= x < j) ==> (b[x] == a[x]); 
+  invariant sortedPartially(b, j);   
+  {
+    b[j] := a[j];
+    j := j + 1;
+  } 
+  
+  // Insert the key to the i position:
+  assert sortedPartially(b, i);
+  b[i] := key;
+  assert sortedPartially(b, i + 1); 
+  
+  // Copy the rest of a (from i + 1 up to the last element): 
+  var k:int := i;
+  while (k < a.Length) 
+  invariant i <= k <= a.Length;
+  invariant forall x:int :: (0 <= x < i) ==> (b[x] == a[x]);
+  invariant b[i] == key;
+  invariant forall x:int :: (i <= x < k) ==> (b[x + 1] == a[x]);
+  invariant sortedPartially(b, i + 1);
+  {
+    b[k + 1] := a[k];
+    k := k + 1;
+  }
+  return b;
+}
